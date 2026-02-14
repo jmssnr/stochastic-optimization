@@ -21,7 +21,7 @@ const CircleLineSeries = ({
     .y((d) => yScale(d));
 
   return (
-    <g className={cn(!highlight && "opacity-20")}>
+    <g className={cn("transition-all", !highlight && "opacity-20")}>
       <path
         d={linePath(data) ?? ""}
         className={cn("fill-none", colors[color].stroke)}

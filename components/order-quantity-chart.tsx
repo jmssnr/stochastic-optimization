@@ -6,8 +6,9 @@ const OrderQuantityChart = (props: {
   width: number;
   height: number;
   data: Iteration[];
+  rule: string;
 }) => {
-  const { width, height, data } = props;
+  const { rule, width, height, data } = props;
 
   const xScale = scaleLinear()
     .range([0, width])
@@ -22,19 +23,21 @@ const OrderQuantityChart = (props: {
         xScale={xScale}
         yScale={yScale}
         color="amber"
+        highlight={rule === "constant"}
       />
       <CircleLineSeries
         data={data.map((d) => d.kesten.orderQuantity)}
         xScale={xScale}
         yScale={yScale}
         color="blue"
-        highlight
+        highlight={rule === "kesten"}
       />
       <CircleLineSeries
         data={data.map((d) => d.harmonic.orderQuantity)}
         xScale={xScale}
         yScale={yScale}
         color="green"
+        highlight={rule === "harmonic"}
       />
       <line
         x1={0}

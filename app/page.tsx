@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <main className="w-screen h-screen p-20">
       <div className="w-full h-full flex">
-        <div className="flex-1 min-w-0 min-h-0 w-full h-full">
+        <div className="flex-2 min-w-0 min-h-0 w-full h-full">
           <div className="min-w-0 min-h-0 w-full h-full flex flex-col gap-5">
             <div>
               <h1 className="text-2xl font-bold">
@@ -60,7 +60,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="border flex-1 w-full h-full border-gray-400"></div>
+        <div className="flex-1 w-full h-full "></div>
       </div>
     </main>
   );

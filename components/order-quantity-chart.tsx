@@ -49,6 +49,15 @@ const OrderQuantityChart = (props: {
       <text className="text-sm fill-gray-400" x={0} y={height} dy={20}>
         Days
       </text>
+      <text
+        className="text-sm fill-gray-400"
+        x={width}
+        y={0}
+        dy={20}
+        transform={`rotate(90, ${width}, ${0})`}
+      >
+        Order Quantity
+      </text>
       <line
         x1={width}
         x2={width}

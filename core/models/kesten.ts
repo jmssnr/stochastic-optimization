@@ -1,4 +1,4 @@
-import { SDPModel } from "@/core/base";
+import { SDPModel } from "@/core/models/base";
 
 export class Kesten extends SDPModel<"counter"> {
   states = { counter: 0, orderQuantity: 0 };

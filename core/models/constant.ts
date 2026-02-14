@@ -1,4 +1,4 @@
-import { SDPModel } from "@/core/base";
+import { SDPModel } from "@/core/models/base";
 
 export class Constant extends SDPModel {
   states = { orderQuantity: 0 };

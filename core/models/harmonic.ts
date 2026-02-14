@@ -1,4 +1,4 @@
-import { SDPModel } from "@/core/base";
+import { SDPModel } from "@/core/models/base";
 
 export class Harmonic extends SDPModel<"time"> {
   states = { orderQuantity: 0, time: 0 };

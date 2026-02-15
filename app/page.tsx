@@ -1,31 +1,42 @@
 "use client";
 
 import ResponsiveContainer from "@/components/chart/responsive-container";
+import DemandHistogram from "@/components/demand-histogram";
 import OrderQuantityChart from "@/components/order-quantity-chart";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { exogenousInformation } from "@/core/exogenous-information";
 import { simulation } from "@/core/simulation";
 import { useAnimate } from "@/hooks/use-animate";
 import { useState } from "react";
 
 export default function Home() {
   const [rule, setRule] = useState<string>("kesten");
+
+  const [demandDistribution, setDemandDistribution] =
+    useState<string>("uniform");
+
+  const randomDemand = exogenousInformation(demandDistribution);
+
   const data = useAnimate(simulation());
+
+  {
+    /* <div>
+    <h1 className="text-2xl font-bold">
+      Stochastic optimization applied to the Newsvendor problem
+    </h1>
+    <h2 className="text-gray-400">
+      Chart shows the evolution of the current order quantity towards
+      its optimal value for three different step size rules
+    </h2>
+  </div> */
+  }
 
   return (
     <main className="w-screen h-screen p-20">
       <div className="w-full h-full flex">
         <div className="flex-2 min-w-0 min-h-0 w-full h-full">
           <div className="min-w-0 min-h-0 w-full h-full flex flex-col gap-5">
-            <div>
-              <h1 className="text-2xl font-bold">
-                Stochastic optimization applied to the Newsvendor problem
-              </h1>
-              <h2 className="text-gray-400">
-                Chart shows the evolution of the current order quantity towards
-                its optimal value for three different step size rules
-              </h2>
-            </div>
             <RadioGroup
               className="w-fit flex gap-6"
               orientation="horizontal"
@@ -59,8 +70,36 @@ export default function Home() {
             </div>
           </div>
         </div>
-
-        <div className="flex-1 w-full h-full "></div>
+        <div className="flex-1 w-full h-full min-w-0 min-h-0 pl-2">
+          <div className="min-w-0 min-h-0 w-full h-full flex flex-col gap-5">
+            <RadioGroup
+              className="w-fit flex gap-6"
+              orientation="horizontal"
+              value={demandDistribution}
+              onValueChange={(v) => setDemandDistribution(v)}
+            >
+              <div className="flex items-center gap-3">
+                <RadioGroupItem value="uniform" id="r5" />
+                <Label htmlFor="r5">Uniform</Label>
+              </div>
+              <div className="flex items-center gap-3">
+                <RadioGroupItem value="gaussian" id="r7" />
+                <Label htmlFor="r7">Gaussian</Label>
+              </div>
+            </RadioGroup>
+            <div className="min-w-0 min-h-0 w-full h-full">
+              <ResponsiveContainer>
+                {({ width, height }) => (
+                  <DemandHistogram
+                    width={width}
+                    height={height}
+                    data={data.map((d) => d.demand)}
+                  />
+                )}
+              </ResponsiveContainer>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
   );

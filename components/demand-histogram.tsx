@@ -1,3 +1,4 @@
+import { bin } from "d3-array";
 import { scaleLinear } from "d3-scale";
 
 const DemandHistogram = (props: {
@@ -7,12 +8,34 @@ const DemandHistogram = (props: {
 }) => {
   const { width, height, data } = props;
 
+  const histogram = bin()
+    .value((d) => d)
+    .domain([50, 100])
+    .thresholds(20);
+  const bins = histogram(data);
+
+  const yScale = scaleLinear()
+    .range([height, 0])
+    .domain([bins.at(0)!.x0!, bins.at(-1)!.x1!]);
+
   const xScale = scaleLinear()
     .range([0, width])
-    .domain([0, data.length < 4 ? 4 : data.length]);
+    .domain([0, Math.max(...bins.map((b) => b.length))]);
 
-  const yScale = scaleLinear().range([height, 0]).domain([0, 100]);
-  return <div>DemandHistogram</div>;
+  return (
+    <svg width={width} height={height} className="overflow-visible">
+      {bins.map((b, i) => (
+        <rect
+          key={i}
+          x={0}
+          y={yScale(b.x1!)}
+          height={yScale(b.x0!) - yScale(b.x1!)}
+          width={xScale(b.length)}
+          className="fill-teal-900 stroke-teal-400 transition-all"
+        />
+      ))}
+    </svg>
+  );
 };
 
 export default DemandHistogram;

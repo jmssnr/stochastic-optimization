@@ -1,18 +1,15 @@
 import { Constant } from "@/core/models/constant";
 import { Harmonic } from "@/core/models/harmonic";
 import { Kesten } from "@/core/models/kesten";
-import { uniform } from "@/core/random/uniform-distribution";
 
 const NUM_ITERATIONS = 160;
-const DMIN = 50;
-const DMAX = 100;
 
-export function* simulation() {
+export function* simulation(exogeneousInformation: () => number) {
   const kesten = new Kesten();
   const constant = new Constant();
   const harmonic = new Harmonic();
 
-  let demand = 0;
+  let demand = exogeneousInformation();
 
   for (let i = 0; i < NUM_ITERATIONS; i++) {
     yield {
@@ -31,7 +28,7 @@ export function* simulation() {
       },
     };
 
-    demand = uniform(DMIN, DMAX);
+    demand = exogeneousInformation();
     kesten.step(demand);
     constant.step(demand);
     harmonic.step(demand);

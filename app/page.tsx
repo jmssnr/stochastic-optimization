@@ -21,7 +21,9 @@ export default function Home() {
 
   const optimum = analyticOptimum(demandDistribution);
 
-  const data = useAnimate(simulation());
+  console.log(optimum)
+
+  const data = useAnimate(simulation(randomDemand));
 
   {
     /* <div>

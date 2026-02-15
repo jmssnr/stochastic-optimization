@@ -1,4 +1,4 @@
-import { bin } from "d3-array";
+import { bin, thresholdFreedmanDiaconis } from "d3-array";
 import { scaleLinear } from "d3-scale";
 
 const DemandHistogram = (props: {
@@ -10,13 +10,13 @@ const DemandHistogram = (props: {
 
   const histogram = bin()
     .value((d) => d)
-    .domain([50, 100])
-    .thresholds(20);
+    .domain([0, 100])
+    .thresholds(30);
   const bins = histogram(data);
 
   const yScale = scaleLinear()
     .range([height, 0])
-    .domain([bins.at(0)!.x0!, bins.at(-1)!.x1!]);
+    .domain([0, 100]);
 
   const xScale = scaleLinear()
     .range([0, width])

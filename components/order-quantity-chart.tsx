@@ -82,8 +82,8 @@ const OrderQuantityChart = (props: {
           Cumulative Reward
         </text>
         <RewardChart
-          width={0.1*width}
-          height={0.6*0.1*width}
+          width={0.2*width}
+          height={0.1*width}
           data={{
             constant: data.at(-1)!.constant.reward,
             harmonic: data.at(-1)!.harmonic.reward,

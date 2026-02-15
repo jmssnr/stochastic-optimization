@@ -1,36 +1,26 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+![Application screenshot](/screenshot.png)
 
-## Getting Started
+# About
 
-First, run the development server:
+This application solves the classic newsvendor problem via gradient-based stochastic optimization.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+The newsvendor problem is given as:
+
+```math
+\underset{x}{\mathrm{max}}\,\, \mathbb{E} \left[F(x, W)\right] = \underset{x}{\mathrm{max}}\,\,\mathbb{E}\left[p\,\mathrm{min}(x, W) - cx \right]\,,
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+where $x$ is the order quantity of a perishable product (e.g., a newspaper), $W$ is the random demand, $p$ is the price at which we sell the product and $c$ is the cost at which we buy the product.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+In the application, we assume that the demand distribution is unknown and employ a stochastic search algorithm as follows:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```math
+x_{n+1} = \mathrm{max} \left[0, x_n + \alpha \frac{\mathrm{d} F(x, W_{n+1})}{\mathrm{d}x}\bigg|_{x=x_n} \right]\,,
+```
 
-## Learn More
+where $\alpha$ is a step size. In the application, three different step size rules are implemented.
 
-To learn more about Next.js, take a look at the following resources:
+For further references, check out the excellent textbooks by W. B. Powell on sequential decision analytics:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [Sequential decision analytics and modelling](https://castle.princeton.edu/sdamodeling/)
+- [Reinforcement Learning and Stochastic Optimization: A unified framework for stochastic optimization](https://castle.princeton.edu/RLSO/)

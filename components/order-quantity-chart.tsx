@@ -1,4 +1,5 @@
 import CircleLineSeries from "@/components/circle-line-series";
+import RewardChart from "@/components/reward-chart";
 import { Iteration } from "@/core/types";
 import { scaleLinear } from "d3-scale";
 
@@ -18,6 +19,21 @@ const OrderQuantityChart = (props: {
 
   return (
     <svg width={width} height={height} className="overflow-visible">
+      <g transform="translate(0, 100)">
+        <text className="text-sm fill-gray-400" x={0} y={0} dy={-15}>
+          Cumulative Reward
+        </text>
+        <RewardChart
+          width={150}
+          height={100}
+          data={{
+            constant: data.at(-1)!.constant.reward,
+            harmonic: data.at(-1)!.harmonic.reward,
+            kesten: data.at(-1)!.kesten.reward,
+          }}
+          highlight={rule}
+        />
+      </g>
       <CircleLineSeries
         data={data.map((d) => d.constant.orderQuantity)}
         xScale={xScale}

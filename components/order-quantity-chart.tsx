@@ -8,8 +8,9 @@ const OrderQuantityChart = (props: {
   height: number;
   data: Iteration[];
   rule: string;
+  optimum: number;
 }) => {
-  const { rule, width, height, data } = props;
+  const { optimum, rule, width, height, data } = props;
 
   const xScale = scaleLinear()
     .range([0, width])
@@ -50,6 +51,16 @@ const OrderQuantityChart = (props: {
       <text className="text-sm fill-gray-400" x={0} y={height} dy={20}>
         Days
       </text>
+      <line
+        x1={0}
+        x2={width}
+        y1={yScale(optimum)}
+        y2={yScale(optimum)}
+        className="stroke-2 stroke-violet-500"
+      />
+      <text className="fill-violet-500 text-sm" x={0} y={yScale(optimum)} dy={-10}>
+        Optimum
+      </text>
       <text
         className="text-sm fill-gray-400"
         x={width}
@@ -71,8 +82,8 @@ const OrderQuantityChart = (props: {
           Cumulative Reward
         </text>
         <RewardChart
-          width={150}
-          height={100}
+          width={0.1*width}
+          height={0.6*0.1*width}
           data={{
             constant: data.at(-1)!.constant.reward,
             harmonic: data.at(-1)!.harmonic.reward,

@@ -5,6 +5,7 @@ import DemandHistogram from "@/components/demand-histogram";
 import OrderQuantityChart from "@/components/order-quantity-chart";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { analyticOptimum } from "@/core/analytic";
 import { exogenousInformation } from "@/core/exogenous-information";
 import { simulation } from "@/core/simulation";
 import { useAnimate } from "@/hooks/use-animate";
@@ -17,6 +18,8 @@ export default function Home() {
     useState<string>("uniform");
 
   const randomDemand = exogenousInformation(demandDistribution);
+
+  const optimum = analyticOptimum(demandDistribution);
 
   const data = useAnimate(simulation());
 
@@ -64,6 +67,7 @@ export default function Home() {
                     height={height}
                     data={data}
                     rule={rule}
+                    optimum={optimum}
                   />
                 )}
               </ResponsiveContainer>

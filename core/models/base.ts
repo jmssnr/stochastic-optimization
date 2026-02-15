@@ -1,6 +1,8 @@
+import { COST, PRICE } from "@/core/parameters";
+
 export abstract class SDPModel<S extends string = string> {
-  price = 6;
-  cost = 5;
+  price = PRICE;
+  cost = COST;
   cumulativeReward = 0;
   abstract states: Record<"orderQuantity" | S, number>;
   abstract decisions: Record<"stepSize", number>;

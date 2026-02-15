@@ -20,20 +20,8 @@ export default function Home() {
 
   const data = useAnimate(simulation, demandDistribution);
 
-  {
-    /* <div>
-    <h1 className="text-2xl font-bold">
-      Stochastic optimization applied to the Newsvendor problem
-    </h1>
-    <h2 className="text-gray-400">
-      Chart shows the evolution of the current order quantity towards
-      its optimal value for three different step size rules
-    </h2>
-  </div> */
-  }
-
   return (
-    <main className="w-dvw h-dvh p-10 sm:p-20">
+    <main className="w-dvw h-dvh p-10 sm:p-20 ">
       <div className="w-full h-full flex flex-col gap-10 sm:flex-row sm:gap-0">
         <div className="flex-2 min-w-0 min-h-0 w-full h-full">
           <div className="min-w-0 min-h-0 w-full h-full flex flex-col gap-5">

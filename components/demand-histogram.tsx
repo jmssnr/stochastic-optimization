@@ -10,13 +10,13 @@ const DemandHistogram = (props: {
 
   const histogram = bin()
     .value((d) => d)
-    .domain([0, 100])
+    .domain([0, 150])
     .thresholds(30);
   const bins = histogram(data);
 
   const yScale = scaleLinear()
     .range([height, 0])
-    .domain([0, 100]);
+    .domain([0, 150]);
 
   const xScale = scaleLinear()
     .range([0, width])

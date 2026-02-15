@@ -16,7 +16,7 @@ const OrderQuantityChart = (props: {
     .range([0, width])
     .domain([0, data.length < 4 ? 4 : data.length]);
 
-  const yScale = scaleLinear().range([height, 0]).domain([0, 100]);
+  const yScale = scaleLinear().range([height, 0]).domain([0, 150]);
 
   return (
     <svg width={width} height={height} className="overflow-visible">
@@ -85,9 +85,9 @@ const OrderQuantityChart = (props: {
           width={0.2*width}
           height={0.1*width}
           data={{
-            constant: data.at(-1)!.constant.reward,
-            harmonic: data.at(-1)!.harmonic.reward,
-            kesten: data.at(-1)!.kesten.reward,
+            constant: data.at(-1)?.constant.reward ?? 0,
+            harmonic: data.at(-1)?.harmonic.reward ?? 0,
+            kesten: data.at(-1)?.kesten.reward ?? 0,
           }}
           highlight={rule}
         />

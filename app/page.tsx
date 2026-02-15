@@ -6,7 +6,6 @@ import OrderQuantityChart from "@/components/order-quantity-chart";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { analyticOptimum } from "@/core/analytic";
-import { exogenousInformation } from "@/core/exogenous-information";
 import { simulation } from "@/core/simulation";
 import { useAnimate } from "@/hooks/use-animate";
 import { useState } from "react";
@@ -17,13 +16,9 @@ export default function Home() {
   const [demandDistribution, setDemandDistribution] =
     useState<string>("uniform");
 
-  const randomDemand = exogenousInformation(demandDistribution);
-
   const optimum = analyticOptimum(demandDistribution);
 
-  console.log(optimum)
-
-  const data = useAnimate(simulation(randomDemand));
+  const data = useAnimate(simulation, demandDistribution);
 
   {
     /* <div>

@@ -33,8 +33,8 @@ export default function Home() {
   }
 
   return (
-    <main className="w-screen h-screen p-20">
-      <div className="w-full h-full flex">
+    <main className="w-dvw h-dvh p-10 sm:p-20">
+      <div className="w-full h-full flex flex-col gap-10 sm:flex-row sm:gap-0">
         <div className="flex-2 min-w-0 min-h-0 w-full h-full">
           <div className="min-w-0 min-h-0 w-full h-full flex flex-col gap-5">
             <RadioGroup

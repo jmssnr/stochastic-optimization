@@ -21,15 +21,20 @@ const RewardChart = (props: {
   return (
     <svg width={width} height={height} className="overflow-visible">
       <rect
+        width={width}
+        height={height}
+        className="fill-gray-900 stroke-gray-500"
+      />
+      <rect
         y={yScale("constant")}
         height={yScale.bandwidth()}
         x={0}
         width={xScale(data.constant)}
         className={cn(
-            "transition-all",
-            colors["amber"].fill,
-            colors["amber"].stroke,
-            highlight !== "constant" && "opacity-20",
+          "transition-all",
+          colors["amber"].fill,
+          colors["amber"].stroke,
+          highlight !== "constant" && "opacity-20",
         )}
       />
       <rect
@@ -38,10 +43,10 @@ const RewardChart = (props: {
         x={0}
         width={xScale(data.kesten)}
         className={cn(
-            "transition-all",
-            colors["blue"].fill,
-            colors["blue"].stroke,
-            highlight !== "kesten" && "opacity-20",
+          "transition-all",
+          colors["blue"].fill,
+          colors["blue"].stroke,
+          highlight !== "kesten" && "opacity-20",
         )}
       />
       <rect
@@ -50,13 +55,12 @@ const RewardChart = (props: {
         x={0}
         width={xScale(data.harmonic)}
         className={cn(
-            "transition-all",
-            colors["green"].fill,
-            colors["green"].stroke,
-            highlight !== "harmonic" && "opacity-20",
+          "transition-all",
+          colors["green"].fill,
+          colors["green"].stroke,
+          highlight !== "harmonic" && "opacity-20",
         )}
       />
-        <rect width={width} height={height} className="fill-none stroke-gray-500"/>
     </svg>
   );
 };
